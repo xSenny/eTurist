@@ -8,7 +8,7 @@ type CreateUserProps = {
 }
 export const createUser = async ({email, fullName, clerkId}: CreateUserProps) => {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
         const newUser = await User.create({email, fullName, clerkId})
 
