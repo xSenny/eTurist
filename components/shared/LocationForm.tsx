@@ -137,6 +137,19 @@ const LocationForm = ({type, userId}: {type: "Add" | "Update"; userId: string | 
                     />
                     <FormField
                         control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Zip</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Zip" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="country"
                         render={({ field }) => (
                             <FormItem>
@@ -182,6 +195,18 @@ const LocationForm = ({type, userId}: {type: "Add" | "Update"; userId: string | 
                                 <FormLabel>Website</FormLabel>
                                 <FormControl>
                                     <Input placeholder="Website" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="imageUrl"
+                        render={({ field }) => (
+                            <FormItem className={"w-full"}>
+                                <FormControl className={"h-72"}>
+                                    <FileUploader onFieldChange={field.onChange} imageUrl={field.value} setFiles={setFiles}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
