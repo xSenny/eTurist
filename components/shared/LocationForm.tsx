@@ -23,7 +23,17 @@ import Dropdown from "@/components/shared/Dropdown";
 import {auth} from "@clerk/nextjs";
 
 const formSchema = z.object({
-    username: z.string().min(2).max(50),
+    name: z.string().min(2).max(50),
+    category: z.string(),
+    address: z.string().min(2).max(50),
+    city: z.string().min(2).max(50),
+    zip: z.string().min(2).max(50),
+    country: z.string().min(2).max(50),
+    description: z.string().min(2).max(400),
+    phone: z.string().min(2).max(50),
+    email: z.string().email(),
+    website: z.string().url(),
+    imageUrl: z.string().url(),
 })
 const LocationForm = ({type, userId}: {type: "Add" | "Update"; userId: string | null }) => {
 
@@ -31,6 +41,18 @@ const LocationForm = ({type, userId}: {type: "Add" | "Update"; userId: string | 
 
 
     const defaultValues = type === "Add" ? {
+        name: '',
+        category: '',
+        address: '',
+        city: '',
+        zip: '',
+        country: '',
+        description: '',
+        phone: '',
+        email: '',
+        website: '',
+        imageUrl: '',
+    } : {
         name: '',
         address: '',
         city: '',
@@ -42,8 +64,6 @@ const LocationForm = ({type, userId}: {type: "Add" | "Update"; userId: string | 
         imageUrl: '',
         description: '',
         category: ''
-    } : {
-
     }
 
     const form = useForm<z.infer<typeof formSchema>>({
