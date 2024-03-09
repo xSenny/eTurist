@@ -24,15 +24,18 @@ import {createCategory} from "@/lib/actions/category.actions";
 
 
 
-const Dropdown = ({value, onChange, categories, userID}: {value: string, onChange: () => void; categories: ICategory[]; userID: string}) => {
+const Dropdown = ({value, onChange, categories, userID}: {value: string, onChange: () => void; categories: [{name: "Salut"}]; userID: string | null}) => {
     const [newCategory, setNewCategory] = useState('');
     const handleCreateCategory =  () => {
         console.log(userID, 'userID')
         setNewCategory('');
-        createCategory({name: newCategory, clerkID: userID})
-            .then(category => {
-                categories.push(category);
-            });
+        if (userID)
+            createCategory({name: newCategory, clerkID: userID})
+                .then(category => {
+                    categories.push(category);
+                });
+        else
+            console.log('No user ID')
     }
 
     return (
