@@ -3,7 +3,7 @@ import Link from "next/link";
 import {landingPageNavLinks} from "@/constants";
 import {Button} from "@/components/ui/button";
 import {SignedIn, SignedOut} from "@clerk/nextjs";
-const Navbar = () => {
+const LandingNavbar = () => {
     return (
         <nav className={"flex justify-between md:justify-around text-secondary-25 pt-5 md:pt-7 px-3"}>
             <Image src={'/assets/icon.png'} alt={'icon'} height={40} width={40}/>
@@ -30,4 +30,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+export default LandingNavbar;

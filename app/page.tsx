@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Navbar from "@/components/shared/Navbar";
+import LandingNavbar from "@/components/shared/LandingNavbar";
 import {TypewriterEffect} from "@/components/ui/typewriter-effect";
 import StickyScrollLanding from "@/components/shared/StickyScrollLanding";
 
@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className={"bg-gray-10 h-full"}>
       <section className={"bg-[#100F57] h-[calc(100vh-75px)] w-full"}>
-          <Navbar />
+          <LandingNavbar />
           <div className={"flex flex-col justify-center items-center h-full"}>
               <TypewriterEffect words={[
                   {

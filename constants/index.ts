@@ -16,3 +16,16 @@ export const landingPageNavLinks = [
         path: "#faq"
     }
 ]
+
+export const sidebarLinks = [
+    {
+        title: "Home",
+        path: "/dashboard",
+        icon: "ri-home-3-fill"
+    },
+    {
+        title: "Switch to Business",
+        path: "/business-dashboard",
+        icon: "ri-briefcase-line"
+    }
+]

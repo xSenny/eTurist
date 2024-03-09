@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import {ClerkProvider} from "@clerk/nextjs";
 import { Poppins } from 'next/font/google'
+import 'remixicon/fonts/remixicon.css'
 
 const poppins = Poppins({
     subsets: ['latin'],

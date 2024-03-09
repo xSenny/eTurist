@@ -9,7 +9,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-    title: "ETurist",
+    title: "ETurist - Busineess Dashboard",
     description: "Promoveaza-ti afacerea cu ETurist",
 };
 
@@ -19,11 +19,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-            <html lang="en">
-                <body className={poppins.className + "scrollbar-hide"}>
-                    <NavBar business={false} />
-                    {children}
-                </body>
-            </html>
+        <html lang="en">
+        <body className={poppins.className + "scrollbar-hide"}>
+        <NavBar business={true} />
+            {children}
+        </body>
+        </html>
     );
 }

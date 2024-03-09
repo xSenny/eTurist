@@ -1,7 +1,8 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { WebhookEvent } from '@clerk/nextjs/server'
-import {createUser} from "@/lib/actions/user.actions";
+import {createUser, deleteUser, updateUser} from "@/lib/actions/user.actions";
+import {clerkClient} from "@clerk/nextjs";
 
 export async function POST(req: Request) {
 
@@ -56,9 +57,9 @@ export async function POST(req: Request) {
     // console.log('Webhook body:', body)
     switch (eventType) {
         case 'user.created': {
-            const { email_addresses, id: clerkId, first_name, last_name } = evt.data;
+            const { email_addresses, id, first_name, last_name } = evt.data;
             const user = {
-                clerkId: clerkId,
+                clerkId: id,
                 email: email_addresses[0].email_address,
                 fullName: `${first_name} ${last_name}`,
             }
@@ -69,8 +70,44 @@ export async function POST(req: Request) {
                     status: 400
                 })
             }
+            if(newUser) {
+                await clerkClient.users.updateUserMetadata(id, {
+                    publicMetadata: {
+                        userId: newUser._id
+                    }
+                })
+            }
             else {
                 return new Response('USER CREATED', { status: 200 })
+            }
+        }
+        case 'user.updated': {
+            const { email_addresses, id: clerkId, first_name, last_name } = evt.data;
+            const user = {
+                email: email_addresses[0].email_address,
+                fullName: `${first_name} ${last_name}`,
+            }
+
+            const updatedUser = await updateUser({clerkId, user});
+            if (!updatedUser) {
+                return new Response('Error occured', {
+                    status: 400
+                })
+            }
+            else {
+                return new Response('USER UPDATED', { status: 200 })
+            }
+        }
+        case 'user.deleted': {
+            const { id: clerkId } = evt.data;
+            const deletedUser = await deleteUser(id!);
+            if (!deletedUser) {
+                return new Response('Error occured', {
+                    status: 400
+                })
+            }
+            else {
+                return new Response('USER DELETED', { status: 200 })
             }
         }
     }
